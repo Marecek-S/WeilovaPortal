@@ -1,0 +1,39 @@
+{
+  "name": "weilovaapp",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@expo-google-fonts/montserrat": "^0.2.2",
+    "@react-navigation/bottom-tabs": "^6.5.2",
+    "@react-navigation/native": "^6.1.1",
+    "@react-navigation/native-stack": "^6.9.6",
+    "@react-navigation/stack": "^6.3.9",
+    "@tanstack/react-query": "^4.20.4",
+    "expo": "~47.0.8",
+    "expo-dev-client": "~2.0.1",
+    "expo-font": "~11.0.1",
+    "expo-secure-store": "~12.0.0",
+    "expo-splash-screen": "~0.17.5",
+    "expo-status-bar": "~1.4.2",
+    "expo-web-browser": "~12.0.0",
+    "react": "18.1.0",
+    "react-native": "0.70.5",
+    "react-native-gesture-handler": "~2.8.0",
+    "react-native-reanimated": "~2.12.0",
+    "react-native-render-html": "^6.3.4",
+    "react-native-safe-area-context": "4.4.1",
+    "react-native-screens": "~3.18.0",
+    "react-native-shadow-2": "^7.0.6",
+    "react-native-svg": "13.4.0",
+    "react-native-svg-transformer": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9"
+  },
+  "private": true
+}
