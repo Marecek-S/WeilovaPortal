@@ -107,13 +107,9 @@ export default function App() {
         throw new Error("Chyba systému");
       }
 
-      await SecureStore.setItemAsync("refresh_token", refresh_token).catch(
-        (err) => {
-          console.log(err);
-        }
-      );
-
       dispatch({ type: "setToken", token: `Bearer ${access_token}` });
+
+      await SecureStore.setItemAsync("refresh_token", refresh_token);
     },
 
     loginRefresh: async () => {
@@ -149,7 +145,10 @@ export default function App() {
 
       dispatch({ type: "setToken", token: `Bearer ${access_token}` });
     },
-    signOut: () => dispatch({ type: "signOut" }),
+    signOut: async () => {
+      await SecureStore.deleteItemAsync("refresh_token");
+      dispatch({ type: "signOut" });
+    },
     token: state.token,
 
     getUser: async () => {
