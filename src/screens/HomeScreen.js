@@ -1,6 +1,6 @@
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import Animated, {
   FadeInUp,
@@ -10,25 +10,32 @@ import Animated, {
 } from "react-native-reanimated";
 import { Shadow } from "react-native-shadow-2";
 import { AktualniHodina, NadchazejiciHodina } from "../components/RozvrhPills";
+import { AuthContext } from "../Context";
 
 export default function HomeScreen({ route }) {
+  const { userInfo } = useContext(AuthContext);
   const theme = useTheme();
 
   //? Pozdrav podle času dne
   return (
     <>
       {/*? Slidein nefunguje */}
-      <Animated.Text
-        entering={FadeInUp.duration(700).delay(100)}
-        style={{
-          color: theme.colors.primary,
-          fontSize: 24,
-          textAlign: "center",
-          fontFamily: "Montserrat_600SemiBold",
-        }}
-      >
-        Dobré ráno, Marku
-      </Animated.Text>
+
+      {userInfo ? (
+        <Animated.Text
+          entering={FadeInUp.duration(700).delay(100)}
+          style={{
+            color: theme.colors.primary,
+            fontSize: 24,
+            textAlign: "center",
+            fontFamily: "Montserrat_600SemiBold",
+          }}
+        >
+          {userInfo?.FullName}
+        </Animated.Text>
+      ) : (
+        <Text style={{ height: 31 }}></Text>
+      )}
 
       <AktualniHodina
         hodina={{

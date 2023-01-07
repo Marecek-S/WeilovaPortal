@@ -68,14 +68,17 @@ function reducer(state, action) {
     case "setToken":
       return { ...state, token: action.token };
     case "signOut":
-      return { token: null, name: "" };
-    case "setName":
-      return { ...state, name: action.name };
+      return { token: null, name: null };
+    case "setUserInfo":
+      return { ...state, userInfo: action.userInfo };
   }
 }
 
 export default function App() {
-  const [state, dispatch] = useReducer(reducer, { token: null, name: "" });
+  const [state, dispatch] = useReducer(reducer, {
+    token: null,
+    userInfo: null,
+  });
 
   //Funkce pro context provider
   //? usememo na všechny kromě state?
@@ -148,6 +151,24 @@ export default function App() {
     },
     signOut: () => dispatch({ type: "signOut" }),
     token: state.token,
+
+    getUser: async () => {
+      const res = await fetch("https://znamky.skolahostivar.cz/api/3/user", {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          authorization: state.token,
+        },
+      });
+
+      if (!res.ok) {
+        console.log("Chyba serveru při načítání uživatele", res.status);
+        return;
+      }
+      const data = await res.json();
+
+      dispatch({ type: "setUserInfo", userInfo: data });
+    },
+    userInfo: state.userInfo,
   };
 
   const [fontsLoaded] = useFonts({
@@ -173,6 +194,12 @@ export default function App() {
         SplashScreen.hideAsync();
       });
   }, [fontsLoaded]);
+
+  useEffect(() => {
+    if (state.token) {
+      authContext.getUser();
+    }
+  }, [state.token]);
 
   if (!fontsLoaded) return null;
   if (!state.token) {
@@ -253,6 +280,7 @@ export default function App() {
               name="Články"
               component={PostScreen}
               options={{
+                unmountOnBlur: true, //reset state při otevření
                 tabBarIcon: ({ color }) => {
                   return <Newspaper width={35} height={35} fill={color} />;
                 },
