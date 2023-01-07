@@ -38,9 +38,12 @@ export default function LoginScreen() {
       Alert.alert(null, "Vyplňte prosím všechna pole");
       return;
     }
-    await loginCredentials(username, password).catch((err) => {
-      Alert.alert(null, err.message);
-    });
+    setIsLoading(true);
+    await loginCredentials(username, password)
+      .catch((err) => {
+        Alert.alert(null, err.message);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   //todo: popup s chybou
