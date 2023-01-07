@@ -87,8 +87,9 @@ export default function LoginScreen() {
       <Logo width={250} height="25%" />
       <Shadow distance={theme.shadowDistance}>
         <TextInput
-          autoCorrect={false}
+          placeholderTextColor={theme.colors.gray}
           selectionColor="black"
+          autoCorrect={false}
           value={username}
           onChangeText={setUsername}
           onSubmitEditing={() => passwordInputRef.current.focus()}
@@ -101,8 +102,9 @@ export default function LoginScreen() {
       </Shadow>
       <Shadow distance={theme.shadowDistance}>
         <TextInput
-          secureTextEntry={true}
+          placeholderTextColor={theme.colors.gray}
           selectionColor="black"
+          secureTextEntry={true}
           value={password}
           onChangeText={setPassword}
           onSubmitEditing={handleLogin}
