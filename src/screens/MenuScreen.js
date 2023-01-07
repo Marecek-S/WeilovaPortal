@@ -41,7 +41,9 @@ export default function MenuScreen() {
             {
               text: "Odhlásit se",
               onPress: () => {
-                signOut();
+                signOut().catch((err) => {
+                  Alert.alert(null, err.message);
+                });
               },
             },
             ,
