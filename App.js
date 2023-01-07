@@ -116,7 +116,8 @@ export default function App() {
       const refresh_token = await SecureStore.getItemAsync("refresh_token");
 
       if (!refresh_token) {
-        throw new Error("Žádný uložený refresh token");
+        console.log("Žádný uložený refresh token");
+        return;
       }
 
       const res = await fetch("https://znamky.skolahostivar.cz/api/login", {
@@ -130,7 +131,9 @@ export default function App() {
       if (!res.ok) {
         if (res.status === 400) {
           await SecureStore.deleteItemAsync("refresh_token");
-          throw new Error("Nepodařilo se automatické přihlášení");
+          throw new Error(
+            "Vaše přihlášení vypršelo, prosím přihlašte se znovu"
+          );
         } else {
           throw new Error("Chyba serveru");
         }
@@ -187,7 +190,7 @@ export default function App() {
         console.log("Uložený token nalezen");
       })
       .catch((err) => {
-        console.log(err.message);
+        Alert.alert(null, err.message);
       })
       .finally(() => {
         SplashScreen.hideAsync();
