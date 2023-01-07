@@ -216,9 +216,9 @@ const Item = ({ item, navigation, theme }) => {
 
                 <Text
                   style={{
+                    fontFamily: "Montserrat_700Bold",
                     paddingTop: 5,
-                    fontSize: 20,
-                    fontWeight: "bold",
+                    fontSize: 18,
                     textAlign: "center",
                     color: theme.colors.primary,
                     textDecorationLine: "underline",
@@ -228,10 +228,11 @@ const Item = ({ item, navigation, theme }) => {
                 </Text>
                 <Text
                   style={{
+                    fontFamily: "Montserrat_500Medium",
                     paddingHorizontal: 10,
                     paddingVertical: 5,
                     fontSize: 14,
-                    fontWeight: "500",
+                    lineHeight: 16,
                   }}
                 >
                   {post.excerpt.rendered

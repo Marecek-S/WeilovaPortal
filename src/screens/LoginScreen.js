@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   input: {
     fontFamily: "Montserrat_700Bold",
     backgroundColor: "white",
-    width: width * 0.8,
+    width: width * 0.85,
     fontSize: 16,
     height: 60,
     borderRadius: 30,
