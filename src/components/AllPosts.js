@@ -102,15 +102,29 @@ export default function Posts({ navigation }) {
         style={{ width: "100%" }}
       >
         <View style={styles.input}>
-          <Search fill={theme.colors.gray} style={{ marginRight: 10 }} />
+          <View
+            style={{
+              marginRight: 10,
+              backgroundColor: theme.colors.background,
+              padding: 10,
+              borderRadius: 30,
+            }}
+          >
+            <Search fill={theme.colors.gray} />
+          </View>
           <TextInput
+            placeholderTextColor={theme.colors.gray}
             selectionColor="black"
             value={search}
             onChangeText={setSearch}
             placeholder="Hledat..."
             style={{ fontWeight: "bold", flex: 1 }}
           />
-          <Pressable onPress={() => setSearch("")} hitSlop={5}>
+          <Pressable
+            onPress={() => setSearch("")}
+            hitSlop={5}
+            style={{ marginRight: 5 }}
+          >
             <Xmark fill={search ? theme.colors.primary : null} />
           </Pressable>
         </View>
@@ -242,6 +256,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     height: 60,
     borderRadius: 30,
-    paddingHorizontal: 20,
+    padding: 10,
   },
 });
