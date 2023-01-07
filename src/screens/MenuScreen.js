@@ -98,8 +98,8 @@ const MenuItem = ({
         <Text
           style={{
             color: color,
-            fontWeight: "bold",
-            fontSize: 24,
+            fontFamily: "Montserrat_600SemiBold",
+            fontSize: 20,
             textAlign: "center",
           }}
         >

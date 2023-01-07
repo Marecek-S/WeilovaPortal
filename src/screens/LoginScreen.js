@@ -144,7 +144,7 @@ export default function LoginScreen() {
 
 const styles = StyleSheet.create({
   input: {
-    fontWeight: "bold",
+    fontFamily: "Montserrat_700Bold",
     backgroundColor: "white",
     width: width * 0.8,
     fontSize: 16,

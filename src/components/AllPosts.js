@@ -118,7 +118,7 @@ export default function Posts({ navigation }) {
             value={search}
             onChangeText={setSearch}
             placeholder="Hledat..."
-            style={{ fontWeight: "bold", flex: 1 }}
+            style={{ fontFamily: "Montserrat_700Bold", flex: 1 }}
           />
           <Pressable
             onPress={() => setSearch("")}
