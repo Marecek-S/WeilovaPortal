@@ -6,6 +6,7 @@ import {
   Button,
   Dimensions,
   Image,
+  KeyboardAvoidingView,
   Modal,
   Pressable,
   StyleSheet,
@@ -87,60 +88,68 @@ export default function LoginScreen() {
         </View>
       </SafeAreaView>
 
-      <Logo width={250} height="25%" />
-      <Shadow distance={theme.shadowDistance}>
-        <TextInput
-          placeholderTextColor={theme.colors.gray}
-          selectionColor="black"
-          autoCorrect={false}
-          value={username}
-          onChangeText={setUsername}
-          onSubmitEditing={() => passwordInputRef.current.focus()}
-          returnKeyType="next"
-          blurOnSubmit={false}
-          style={styles.input}
-          placeholder="Uživatelské jméno"
-          ref={usernameInputRef}
-        />
-      </Shadow>
-      <Shadow distance={theme.shadowDistance}>
-        <TextInput
-          placeholderTextColor={theme.colors.gray}
-          selectionColor="black"
-          secureTextEntry={true}
-          value={password}
-          onChangeText={setPassword}
-          onSubmitEditing={handleLogin}
-          returnKeyType="done"
-          style={styles.input}
-          placeholder="Heslo"
-          ref={passwordInputRef}
-        />
-      </Shadow>
-      <Pressable
-        onPress={handleLogin}
-        style={({ pressed }) => [
-          {
-            paddingVertical: 10,
-            paddingHorizontal: 30,
-            backgroundColor: theme.colors.primary,
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: 30,
-          },
-        ]}
+      <KeyboardAvoidingView
+        behavior="height" //? vyzkoušet na IOS
+        style={{ alignItems: "center", flex: 1 }}
       >
-        <Text
-          style={{
-            color: "white",
-            fontSize: 20,
-            fontWeight: "bold",
-            letterSpacing: 0.5,
-          }}
+        <Logo width={250} height="20%" style={{ marginBottom: 20 }} />
+        <Shadow distance={theme.shadowDistance}>
+          <TextInput
+            keyboardType="visible-password"
+            autoCapitalize="none"
+            placeholderTextColor={theme.colors.gray}
+            selectionColor="black"
+            autoCorrect={false}
+            value={username}
+            onChangeText={setUsername}
+            onSubmitEditing={() => passwordInputRef.current.focus()}
+            returnKeyType="next"
+            blurOnSubmit={false}
+            style={styles.input}
+            placeholder="Uživatelské jméno"
+            ref={usernameInputRef}
+          />
+        </Shadow>
+        <Shadow distance={theme.shadowDistance}>
+          <TextInput
+            autoCapitalize="none"
+            placeholderTextColor={theme.colors.gray}
+            selectionColor="black"
+            secureTextEntry={true}
+            value={password}
+            onChangeText={setPassword}
+            onSubmitEditing={handleLogin}
+            returnKeyType="done"
+            style={styles.input}
+            placeholder="Heslo"
+            ref={passwordInputRef}
+          />
+        </Shadow>
+        <Pressable
+          onPress={handleLogin}
+          style={({ pressed }) => [
+            {
+              paddingVertical: 10,
+              paddingHorizontal: 30,
+              backgroundColor: theme.colors.primary,
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: 30,
+            },
+          ]}
         >
-          Přihlástit se
-        </Text>
-      </Pressable>
+          <Text
+            style={{
+              color: "white",
+              fontSize: 20,
+              fontWeight: "bold",
+              letterSpacing: 0.5,
+            }}
+          >
+            Přihlástit se
+          </Text>
+        </Pressable>
+      </KeyboardAvoidingView>
     </View>
   );
 }
