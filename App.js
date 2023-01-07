@@ -33,9 +33,9 @@ import { AuthContext } from "./src/Context";
 import HomeScreen from "./src/screens/HomeScreen";
 import LoginScreen from "./src/screens/LoginScreen";
 import MenuScreen from "./src/screens/MenuScreen";
+import NadchazejiciScreen from "./src/screens/NadchazejiciScreen";
 import PostScreen from "./src/screens/PostScreen";
 import RozvrhScreen from "./src/screens/RozvrhScreen";
-import NadchazejiciScreen from "./src/screens/NadchazejiciScreen";
 
 import Clock from "./assets/icons/clock.svg";
 import Dots from "./assets/icons/dots.svg";
@@ -76,14 +76,6 @@ function reducer(state, action) {
 
 export default function App() {
   const [state, dispatch] = useReducer(reducer, { token: null, name: "" });
-
-  useFonts({
-    Montserrat_500Medium,
-    Montserrat_600SemiBold,
-    Montserrat_700Bold,
-    Montserrat_800ExtraBold,
-    Montserrat_900Black,
-  });
 
   //Funkce pro context provider
   //? usememo na všechny kromě state?
@@ -158,7 +150,17 @@ export default function App() {
     token: state.token,
   };
 
+  const [fontsLoaded] = useFonts({
+    Montserrat_500Medium,
+    Montserrat_600SemiBold,
+    Montserrat_700Bold,
+    Montserrat_800ExtraBold,
+    Montserrat_900Black,
+  });
+
   useEffect(() => {
+    if (!fontsLoaded) return;
+    console.log("Font loaded");
     authContext
       .loginRefresh()
       .then(() => {
@@ -170,8 +172,9 @@ export default function App() {
       .finally(() => {
         SplashScreen.hideAsync();
       });
-  }, []);
+  }, [fontsLoaded]);
 
+  if (!fontsLoaded) return null;
   if (!state.token) {
     return (
       <AuthContext.Provider value={authContext}>
