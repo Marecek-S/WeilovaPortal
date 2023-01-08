@@ -23,6 +23,7 @@ import {
 } from "@tanstack/react-query";
 import * as SecureStore from "expo-secure-store";
 import * as SplashScreen from "expo-splash-screen";
+import * as SystemUI from "expo-system-ui";
 import { useEffect, useMemo, useReducer, useState } from "react";
 import { Alert, Button, Modal, StyleSheet, Text, View } from "react-native";
 import "react-native-gesture-handler";
@@ -140,13 +141,15 @@ export default function App() {
       }
 
       const data = await res.json();
-      const { access_token, token_type, new_refresh_token } = data;
+      const { access_token, token_type } = data;
 
       if (!access_token) {
         throw new Error("Chyba systému");
       }
 
       dispatch({ type: "setToken", token: `Bearer ${access_token}` });
+
+      await SecureStore.setItemAsync("refresh_token", data.refresh_token); //
     },
     signOut: async () => {
       await SecureStore.deleteItemAsync("refresh_token");
@@ -184,6 +187,7 @@ export default function App() {
   useEffect(() => {
     if (!fontsLoaded) return;
     console.log("Font loaded");
+    SystemUI.setBackgroundColorAsync(Theme.colors.background);
     authContext
       .loginRefresh()
       .then(() => {
